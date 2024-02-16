@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+
+    environment{
+        DOCKER_IMAGE_NAME = 'calculator'
+        GITHUB_REPO_URL = 'https://github.com/SambhuPNS/SPE_MiniProject.git'
+    }
+
+    stages {
+        stage('GIT CHECKOUT') {
+            steps {
+                script {
+                        // Checkout the code from the GitHub repository
+                        git branch: 'master', credentialsId: 'jenkins-webhook', url: "${GITHUB_REPO_URL}"
+                }
+            }
+        }
+        stage('MAVEN BUILD') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('MAVEN TEST') {
+             steps {
+                 sh 'mvn test'
+             }
+        }
+
+        stage('BUILD DOCKER IMAGE') {
+            steps {
+                    script {
+			//build docker image
+                        docker.build("${DOCKER_IMAGE_NAME}", '.')
+                    }
+            }
+        }
+
+        stage('PUSH DOCKER IMAGE') {
+            steps {
+                script{
+                    docker.withRegistry('', 'DockerHubCred') {
+                    sh 'docker tag java_calc anjalijkumar/java_calc:latest'
+                    sh 'docker push anjalijkumar/java_calc'
+                    }
+                }
+
+                sh "docker rmi anjalijkumar/java_calc"
+                sh "docker rmi java_calc:latest"
+
+            }
+        }
+
+        stage('RUN ANSIBLE PLAYBOOK') {
+            steps {
+                script {
+                    ansiblePlaybook(
+                        playbook: 'deploy.yml',
+                        inventory: 'inventory'
+                    )
+                }
+            }
+        }
+    }
+}
