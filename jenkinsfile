@@ -10,8 +10,8 @@ pipeline {
         stage('GIT CHECKOUT') {
             steps {
                 script {
-                        // Checkout the code from the GitHub repository-'webhook-token'
-			git branch: 'main', credentialsId: 'token', url: "${GITHUB_REPO_URL}"
+                        // Checkout the code from the GitHub repository-
+			git branch: 'main', credentialsId: 'webhook-token', url: "${GITHUB_REPO_URL}"
                 }
             }
         }
