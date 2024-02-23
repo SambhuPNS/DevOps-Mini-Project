@@ -10,13 +10,14 @@ pipeline {
         stage('GIT CHECKOUT') {
             steps {
                 script {
-                        // Checkout the code from the GitHub repository-
+                        // Checkout the code from the GitHub repository
 			git branch: 'main', credentialsId: 'webhook-token', url: "${GITHUB_REPO_URL}"
                 }
             }
         }
         stage('MAVEN BUILD') {
             steps {
+		//build project
                 sh 'mvn clean install'
             }
         }
