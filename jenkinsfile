@@ -42,12 +42,25 @@ pipeline {
                 script{
                     docker.withRegistry('', 'DockerHubCred') {
                     sh 'docker tag java_calculator sambhuss/java_calculator:latest'
-                    sh 'docker push anjalijkumar/java_calculator'
+                    sh 'docker push sambhuss/java_calculator'
                     }
                 }
+	
+		//Remove dangling images
+		sh "docker image prune -f"
+		script{
+			//check if container is already running
+			def isContainerRunning = sh(script: "docker ps -q --filter name=java_calculator", returnStatus: true)
 
-                sh "docker rmi anjalijkumar/java_calculator"
-                sh "docker rmi java_calculator:latest"
+		if(isContainerRunning == 0) {
+			//if container is running stop it
+			sh "docker stop java_calculator"
+			}
+		}
+		 
+		//remove container and image
+		sh "docker rm java_calculator:latest || true"
+                sh "docker rmi -f sambhuss/java_calculator || true"
 
             }
         }
