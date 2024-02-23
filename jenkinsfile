@@ -41,8 +41,8 @@ pipeline {
             steps {
                 script{
                     docker.withRegistry('', 'DockerHubCred') {
-                    sh 'docker tag java_calculator sambhuss/java_calculator:latest'
-                    sh 'docker push sambhuss/java_calculator'
+                    sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
+                    sh 'sudo docker push sambhuss/java_calculator'
                     }
                 }
 	
@@ -50,17 +50,17 @@ pipeline {
 		sh "docker image prune -f"
 		script{
 			//check if container is already running
-			def isContainerRunning = sh(script: "docker ps -q --filter name=java_calculator", returnStatus: true)
+			def isContainerRunning = sh(script: "sudo docker ps -q --filter name=java_calculator", returnStatus: true)
 
 		if(isContainerRunning == 0) {
 			//if container is running stop it
-			sh "docker stop java_calculator"
+			sh "sudo docker stop java_calculator"
 			}
 		}
 		 
 		//remove container and image
-		sh "docker rm java_calculator:latest || true"
-                sh "docker rmi -f sambhuss/java_calculator || true"
+		sh "sudo docker rm java_calculator:latest || true"
+                sh "sudo docker rmi -f sambhuss/java_calculator || true"
 
             }
         }
