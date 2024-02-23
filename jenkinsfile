@@ -31,8 +31,8 @@ pipeline {
         stage('BUILD DOCKER IMAGE') {
             steps {
                     script {
-			
-                        docker.build("${DOCKER_IMAGE_NAME}", '.')
+                        //docker.build("${DOCKER_IMAGE_NAME}", '.')
+			sh 'docker build -t $DOCKER_IMAGE_NAME .'
                     }
             }
         }
