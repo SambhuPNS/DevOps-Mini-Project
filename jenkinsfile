@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                         // Checkout the code from the GitHub repository
-                        git branch: 'master', credentialsId: 'jenkins-webhook', url: "${GITHUB_REPO_URL}"
+			git branch: 'main', credentialsId: 'webhook-token', url: "${GITHUB_REPO_URL}"
                 }
             }
         }
@@ -40,13 +40,13 @@ pipeline {
             steps {
                 script{
                     docker.withRegistry('', 'DockerHubCred') {
-                    sh 'docker tag java_calc anjalijkumar/java_calc:latest'
-                    sh 'docker push anjalijkumar/java_calc'
+                    sh 'docker tag java_calculator sambhuss/java_calculator:latest'
+                    sh 'docker push anjalijkumar/java_calculator'
                     }
                 }
 
-                sh "docker rmi anjalijkumar/java_calc"
-                sh "docker rmi java_calc:latest"
+                sh "docker rmi anjalijkumar/java_calculator"
+                sh "docker rmi java_calculator:latest"
 
             }
         }
