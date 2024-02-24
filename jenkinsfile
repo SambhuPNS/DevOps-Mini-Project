@@ -7,7 +7,7 @@ pipeline {
 	DOCKER_REGISTRY_CREDENTIAL = credentials('DockerHubCred')
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
-	DOCKER_REGISTRY = 'https://index.docker.io/v2/'
+	DOCKER_REGISTRY = 'https://hub.docker.com/repositories/sambhuss'
     }
 
     stages {
@@ -52,7 +52,7 @@ pipeline {
 
 		script {
                     withCredentials([usernamePassword(credentialsId: 'DockerHubCred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        docker.withRegistry('https://index.docker.io/v2/', 'DockerHubCred') {
+                        docker.withRegistry('https://hub.docker.com/repositories/sambhuss', 'DockerHubCred') {
                             docker.image("java_calculator").push()
                         }
                     }
