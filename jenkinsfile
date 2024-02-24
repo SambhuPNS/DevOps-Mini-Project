@@ -50,14 +50,19 @@ pipeline {
             //        sh 'sudo docker push sambhuss/java_calculator'
               //      }
 //https://docker.io/sambhuss
+                script {
+                    // Docker login with credentials
+                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        // Log in to Docker registry
+                        sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USERNAME --password-stdin \$DOCKER_REGISTRY"
 
-		script {
-                    withCredentials([usernamePassword(credentialsId: 'DockerHubCred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        docker.withRegistry('https://docker.io/sambhuss', 'DockerHubCred') {
-                            docker.image("java_calculator").push()
-                        }
+			sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
+
+                        // Push the Docker image to Docker Hub
+                        sh "sudo docker push sambhuss/java_calculator"
                     }
                 }
+            }
 
 	
 		//Remove dangling images
