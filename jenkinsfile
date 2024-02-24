@@ -7,7 +7,7 @@ pipeline {
 	DOCKER_REGISTRY_CREDENTIAL = credentials('DockerHubCred')
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
-	DOCKER_REGISTRY = 'https://hub.docker.com/repositories/sambhuss'
+	DOCKER_REGISTRY = 'https://index.docker.io/v2/'
     }
 
     stages {
