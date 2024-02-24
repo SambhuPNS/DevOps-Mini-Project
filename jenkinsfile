@@ -48,7 +48,7 @@ pipeline {
                     sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
 
                     // Push the Docker image to Docker Hub
-                    sh "docker push $DOCKER_REGISTRY/java_calculator"
+                    sh "docker push sambhuss/java_calculator"
                 }
             }
         }
