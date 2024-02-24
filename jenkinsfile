@@ -45,7 +45,7 @@ pipeline {
                 // Docker login with credentials
                 withCredentials([usernamePassword(credentialsId: DockerHubCred, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     // Log in to Docker registry
-                    sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
+                    sh "docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
 
                     // Push the Docker image to Docker Hub
                     sh "docker push sambhuss/java_calculator"
