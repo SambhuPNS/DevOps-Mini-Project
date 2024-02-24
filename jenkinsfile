@@ -56,7 +56,7 @@ pipeline {
                     }
                 }
             }
-	}
+	
 
 	
 		//Remove dangling images
