@@ -47,7 +47,7 @@ pipeline {
                 }
 	
 		//Remove dangling images
-		sh "docker image prune -f"
+		sh "sudo docker image prune -f"
 		script{
 			//check if container is already running
 			def isContainerRunning = sh(script: "sudo docker ps -q --filter name=java_calculator", returnStatus: true)
