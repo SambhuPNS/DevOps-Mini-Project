@@ -44,7 +44,7 @@ pipeline {
         stage('PUSH DOCKER IMAGE') {
             steps {
                 script {
-                    // Docker login with credentials
+                    // Docker login with credentialsncmmcnmz
                     withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                         // Log in to Docker registry
                         sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USERNAME --password-stdin \$DOCKER_REGISTRY"
