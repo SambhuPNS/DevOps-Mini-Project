@@ -40,43 +40,20 @@ pipeline {
                     }
             }
         }
-
-        stage('PUSH DOCKER IMAGE') {
+        stage('Push Docker Image') {
             steps {
-                script {
-                    // Docker login with credentialsncmmcnmz
-                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        // Log in to Docker registry
-                        sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USERNAME --password-stdin \$DOCKER_REGISTRY"
+                // Docker login with credentials
+                withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    // Log in to Docker registry
+                    sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USERNAME --password-stdin \$DOCKER_REGISTRY"
 
-			sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
-
-                        // Push the Docker image to Docker Hub
-                        sh "sudo docker push sambhuss/java_calculator"
-                    }
+                    // Push the Docker image to Docker Hub
+                    sh "sudo docker push \$DOCKER_REGISTRY/java_calculator"
                 }
             }
-	
-
-	
-		//Remove dangling images
-		sh "sudo docker image prune -f"
-		script{
-			//check if container is already running
-			def isContainerRunning = sh(script: "sudo docker ps -q --filter name=java_calculator", returnStatus: true)
-
-		if(isContainerRunning == 0) {
-			//if container is running stop it
-			sh "sudo docker stop java_calculator"
-			}
-		}
-		 
-		//remove container and image
-		sh "sudo docker rm java_calculator:latest || true"
-                sh "sudo docker rmi -f sambhuss/java_calculator || true"
-
-            }
         }
+	
+
 
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
