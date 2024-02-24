@@ -7,7 +7,7 @@ pipeline {
 	DOCKER_REGISTRY_CREDENTIAL = credentials('DockerHubCred')
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
-	DOCKER_REGISTRY = 'https://hub.docker.com/repositories/sambhuss'
+	DOCKER_REGISTRY = 'https://docker.io/sambhuss'
     }
 
     stages {
@@ -49,10 +49,11 @@ pipeline {
           //          sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
             //        sh 'sudo docker push sambhuss/java_calculator'
               //      }
+//https://docker.io/sambhuss
 
 		script {
                     withCredentials([usernamePassword(credentialsId: 'DockerHubCred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        docker.withRegistry('https://hub.docker.com/repositories/sambhuss', 'DockerHubCred') {
+                        docker.withRegistry('https://docker.io/sambhuss', 'DockerHubCred') {
                             docker.image("java_calculator").push()
                         }
                     }
