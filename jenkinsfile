@@ -40,6 +40,7 @@ pipeline {
         stage('PUSH DOCKER IMAGE') {
             steps {
                 script{
+			//push
                     docker.withRegistry('', 'DockerHubCred') {
                     sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
                     sh 'sudo docker push sambhuss/java_calculator'
