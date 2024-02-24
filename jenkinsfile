@@ -43,21 +43,13 @@ pipeline {
 
         stage('PUSH DOCKER IMAGE') {
             steps {
-        //        script{
+               script{
 			//push
-//                    docker.withRegistry('', 'DockerHubCred') {
-  //                  sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
-    //                sh 'sudo docker push sambhuss/java_calculator'
-      //              }
-
-		script {
-                    // Log in to Docker registry
-                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIAL, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
+                    docker.withRegistry('', 'DockerHubCred') {
+                    sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
+                    sh 'sudo docker push sambhuss/java_calculator'
                     }
-		sh 'sudo docker tag java_calculator sambhuss/java_calculator:latest'
-                sh 'sudo docker push sambhuss/java_calculator'
-                }
+
 	
 		//Remove dangling images
 		sh "sudo docker image prune -f"
