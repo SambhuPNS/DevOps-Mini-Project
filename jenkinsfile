@@ -45,10 +45,10 @@ pipeline {
                 // Docker login with credentials
                 withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     // Log in to Docker registry
-                    sh "echo \$DOCKER_PASSWORD | docker login --username \$DOCKER_USERNAME --password-stdin \$DOCKER_REGISTRY"
+                    sh "echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
 
                     // Push the Docker image to Docker Hub
-                    sh "docker push \$DOCKER_REGISTRY/java_calculator"
+                    sh "docker push $DOCKER_REGISTRY/java_calculator"
                 }
             }
         }
