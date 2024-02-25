@@ -6,7 +6,7 @@
   tasks:
     - name: Pull Docker Image
       docker_image:
-        name: "sambhuss/spe-repo/java_calculator:latest"
+        name: "java_calculator:latest"
         source: pull
       register: docker_pull_result
 
