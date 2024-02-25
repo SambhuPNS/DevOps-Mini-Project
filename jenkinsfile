@@ -4,7 +4,9 @@ pipeline {
     environment{
         DOCKER_IMAGE_NAME = 'java_calculator'
         GITHUB_REPO_URL = 'https://github.com/SambhuPNS/SPE_MiniProject.git'
-	DOCKER_REGISTRY_CREDENTIALS = credentials('DOCKERHUBCRED')
+	//DOCKER_REGISTRY_CREDENTIALS = credentials('DOCKERHUBCRED')
+	DOCKER_REGISTRY_CREDENTIALS = credentials('GLOBAL', 'DOCKERHUBCRED') // Assuming a global credential
+
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
 	//DOCKER_USERNAME = credentials('DockerHubCred').username
@@ -49,7 +51,7 @@ pipeline {
 	                // Docker login with credentials
 	                withCredentials([usernamePassword(credentialsId: DOCKERHUBCRED, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 	                    // Log in to Docker registry
-	                    sh "docker login --username ${DOCKER_REGISTRY_CREDENTIALS_USR} --password-stdin ${DOCKER_REGISTRY_CREDENTIALS_PSW}"
+	                    sh "docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}"
 	
 	                    // Push the Docker image to Docker Hub
 	                    sh "sudo docker push sambhuss/java_calculator"
