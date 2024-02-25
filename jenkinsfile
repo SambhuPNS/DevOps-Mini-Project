@@ -48,7 +48,7 @@ pipeline {
 	stage('Push Docker Image') {
 	            steps {
 	                // Docker login with credentials
-	                withCredentials([usernamePassword(credentialsId: DOCKERHUB_CRED, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+	                withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 		            // Log in to Docker registry
 		            sh "docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}"
 
