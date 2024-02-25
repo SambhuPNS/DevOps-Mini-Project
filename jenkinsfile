@@ -4,8 +4,7 @@ pipeline {
     environment{
         DOCKER_IMAGE_NAME = 'java_calculator'
         GITHUB_REPO_URL = 'https://github.com/SambhuPNS/SPE_MiniProject.git'
-	//DOCKER_REGISTRY_CREDENTIALS = credentials('DOCKERHUBCRED')
-	DOCKER_REGISTRY_CREDENTIALS = credentials('GLOBAL', 'DOCKERHUBCRED') // Assuming a global credential
+	DOCKER_REGISTRY_CREDENTIALS = credentials('DOCKERHUBCRED')
 
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
