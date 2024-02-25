@@ -50,15 +50,15 @@ pipeline {
 	                // Docker login with credentials
 	              
 		            // Log in to Docker registry
-		            sh "docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}"
+		            sh 'docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}'
 
 			   // sh "docker login -u username -p ${DOCKER_USERNAME}"
 		
 		            // Tag the Docker image with the desired repository name
-		            sh "docker tag java_calculator ${DOCKER_USERNAME}/spe-repo:latest"
+		            sh 'docker tag java_calculator ${DOCKER_USERNAME}/spe-repo:latest'
 		
 		            // Push the Docker image to Docker Hub with the specified repository
-		            sh "docker push ${DOCKER_USERNAME}/spe-repo:latest"
+		            sh 'docker push ${DOCKER_USERNAME}/spe-repo:latest'
        			
 		}
 	}
