@@ -58,7 +58,8 @@ pipeline {
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
                 script {
-                    sh '/home/vboxuser/.local/bin/ansible-playbook -i inventory deploy.yaml'
+                    //sh '/home/vboxuser/.local/bin/ansible-playbook -i inventory deploy.yaml'
+		      sh '/home/vboxuser/.local/bin/ansible-playbook -i inventory deploy.yaml'
                 }
             }
         }
