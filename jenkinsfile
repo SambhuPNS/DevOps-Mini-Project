@@ -51,6 +51,8 @@ pipeline {
 	                withCredentials([usernamePassword(credentialsId: DOCKERHUB_CRED, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 		            // Log in to Docker registry
 		            sh "docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}"
+
+			   // sh "docker login -u username -p ${DOCKER_USERNAME}"
 		
 		            // Tag the Docker image with the desired repository name
 		            sh "docker tag sambhuss/java_calculator ${DOCKER_USERNAME}/spe-repo:latest"
