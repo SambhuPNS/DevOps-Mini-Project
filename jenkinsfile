@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        // Define the Ansible tool installation named 'Ansible'
+        ansible 'Ansible'
+    }
+
 
     environment{
         DOCKER_IMAGE_NAME = 'java_calculator'
