@@ -11,7 +11,7 @@ pipeline {
 	DOCKER_USERNAME = 'sambhuss'
 	DOCKER_REGISTRY = 'https://docker.io/sambhuss'
 
-	PATH = "/home/vboxuser/.local/bin:$PATH"
+	//PATH = "/home/vboxuser/.local/bin:$PATH"
     }
 
     stages {
@@ -58,7 +58,7 @@ pipeline {
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
                 script {
-                    sh 'ansible-playbook -i inventory deploy.yaml'
+                    sh '/home/vboxuser/.local/bin/ansible-playbook -i inventory deploy.yaml'
                 }
             }
         }
