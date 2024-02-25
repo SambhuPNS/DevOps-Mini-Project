@@ -50,7 +50,7 @@ pipeline {
 							sh 'docker push sambhuss/java_calculator'
 					}
 				}
-			}
+		}
 	}
 	
         stage('RUN ANSIBLE PLAYBOOK') {
