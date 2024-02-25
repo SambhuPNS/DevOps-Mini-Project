@@ -9,8 +9,6 @@ pipeline {
 
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
-	//DOCKER_USERNAME = credentials('DockerHubCred').username
-        //DOCKER_PASSWORD = credentials('DockerHubCred').password
 	DOCKER_REGISTRY = 'https://docker.io/sambhuss'
     }
 
