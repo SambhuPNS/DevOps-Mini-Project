@@ -42,17 +42,20 @@ pipeline {
                     }
             }
         }
-        stage('PUSH DOCKER IMAGE') {
-            steps {
-                script{
-                    docker.withRegistry('https://docker.io', 'DockerHubCred') {
-                    sh 'docker tag java_calculator sambhuss/java_calculator:latest'
-	            sh "docker login --username ${DOCKER_REGISTRY_CREDENTIALS_USR} --password-stdin ${DOCKER_REGISTRY_CREDENTIALS_PSW}"
-                    sh 'docker push sambhuss/java_calcator'
-                    }
-                }
-	   }
-      }
+     
+
+	stage('Push Docker Image') {
+	            steps {
+	                // Docker login with credentials
+	                withCredentials([usernamePassword(credentialsId: DockerHubCred, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+	                    // Log in to Docker registry
+	                    sh "sudo docker login --username ${DOCKER_USERNAME} --password-stdin ${DOCKER_PASSWORD}"
+	
+	                    // Push the Docker image to Docker Hub
+	                    sh "sudo docker push sambhuss/java_calculator"
+	        	}
+		}
+	}
 	
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
