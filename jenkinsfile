@@ -47,8 +47,8 @@ pipeline {
 				steps{
 					script{
 						docker.withRegistry('', 'DOCKERHUB_CRED') {
-							sh 'docker tag java_calculator sambhuss/spe-repo:latest'
-							sh 'docker push sambhuss/spe-repo:latest'
+							sh 'docker tag java_calculator sambhuss/sperepo:latest'
+							sh 'docker push sambhuss/sperepo:latest'
 					}
 				}
 			}
