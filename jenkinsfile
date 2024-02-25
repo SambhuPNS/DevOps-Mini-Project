@@ -10,6 +10,8 @@ pipeline {
 	DOCKER_PASSWORD = 'Sambhu@123'
 	DOCKER_USERNAME = 'sambhuss'
 	DOCKER_REGISTRY = 'https://docker.io/sambhuss'
+
+	PATH = "/home/vboxuser/.local/bin:$PATH"
     }
 
     stages {
