@@ -51,7 +51,7 @@ pipeline {
 							sh 'docker tag java_calculator sambhuss/java_calculator:latest'
 							sh 'docker push sambhuss/java_calculator'
 					}
-				}
+			}
 		}
 	}
 	
