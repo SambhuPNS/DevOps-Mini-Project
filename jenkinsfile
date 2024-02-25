@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+
     environment{
         DOCKER_IMAGE_NAME = 'java_calculator'
         GITHUB_REPO_URL = 'https://github.com/SambhuPNS/SPE_MiniProject.git'
@@ -57,10 +58,7 @@ pipeline {
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
                 script {
-                    ansiblePlaybook(
-                        playbook: 'deploy.yaml'
-                        //inventory: 'inventory'
-                    )
+                    ansiblePlaybook installation: 'Ansible', playbook: 'deploy.yaml', vaultTmpPath: ''
                 }
             }
         }
