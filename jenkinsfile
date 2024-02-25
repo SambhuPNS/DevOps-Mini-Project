@@ -42,14 +42,16 @@ pipeline {
                     }
             }
         }
-       stage('Push to Dockerhub') {
-
-                steps {
-                    script {
-                        sh 'docker push $DOCKER_IMAGE_NAME'
+        stage('PUSH DOCKER IMAGE') {
+            steps {
+                script{
+                    docker.withRegistry('', 'DockerHubCred') {
+                    sh 'docker tag java_calculator sambhuss/java_calculator:latest'
+                    sh 'docker push sambhuss/java_calcator'
                     }
                 }
-            }
+	   }
+      }
 	
         stage('RUN ANSIBLE PLAYBOOK') {
             steps {
