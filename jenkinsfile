@@ -47,6 +47,7 @@ pipeline {
                 script{
                     docker.withRegistry('', 'DockerHubCred') {
                     sh 'docker tag java_calculator sambhuss/java_calculator:latest'
+	            sh "sudo docker login --username sambhuss --password-stdin $DOCKER_PASSWORD"
                     sh 'docker push sambhuss/java_calcator'
                     }
                 }
